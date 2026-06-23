@@ -18,7 +18,7 @@
         compatible = "zmk,combos";
 
         combo_gaming_toggle {
-            timeout-ms = <50>;
+            timeout-ms = <250>;
             key-positions = <52 55>;
             bindings = <&tog GAMING>;
         };
