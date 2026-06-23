@@ -15,21 +15,22 @@
 
 / {
     behaviors {
-        td_gaming_grave: gaming_grave_tap_dance {
+        td_gaming_toggle: gaming_toggle_tap_dance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
-            bindings = <&kp GRAVE>, <&tog GAMING>;
+            bindings = <&none>, <&tog 3>;
         };
     };
 
     combos {
         compatible = "zmk,combos";
 
+        // Lower + GUI: both left-thumb keys (central half, no split delay)
         combo_gaming_toggle {
             timeout-ms = <500>;
-            key-positions = <52 55>;
-            bindings = <&tog GAMING>;
+            key-positions = <52 53>;
+            bindings = <&tog 3>;
         };
     };
 
@@ -42,7 +43,7 @@
             // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   |   -   |
             // |  CTRL |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
             // |  SHFT |  Z  |  X  |  C   |  V   |  B   |   {    |    }   |  N   |  M    |  ,    |  .   |   /   |  RET  |
-            //                     | ALT  |      | Lower|  CMD   |  | SPACE | Raise |  ~×2  |  GUI  |
+            //                     | ALT  | G×2  | Lower|  CMD   |  | SPACE | Raise |   ~   |  GUI  |
 
             display-name = "Base";
             bindings = <
@@ -50,7 +51,7 @@
 &kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                           &kp Y   &kp U      &kp I      &kp O    &kp P     &kp MINUS
 &kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                           &kp H   &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
-                           &kp LALT  &none   &mo LOWER   &kp LGUI     &kp SPACE  &mo RAISE   &td_gaming_grave  &kp RGUI
+                           &kp LALT  &td_gaming_toggle  &mo LOWER   &kp LGUI     &kp SPACE  &mo RAISE   &kp GRAVE  &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -98,14 +99,14 @@
 
         gaming_layer {
             // Left hand mirrors base (via &trans); right hand disabled.
-            // Thumbs: Alt | — | Lower | Space
+            // Thumbs: Alt | G×2 | Lower | Space
             display-name = "Gaming";
             bindings = <
 &trans     &trans  &trans  &trans   &trans   &trans                     &none  &none  &none  &none  &none  &none
 &trans     &trans  &trans  &trans   &trans   &trans                     &none  &none  &none  &none  &none  &none
 &trans     &trans  &trans  &trans   &trans   &trans                     &none  &none  &none  &none  &none  &none
 &trans     &trans  &trans  &trans   &trans   &trans    &trans    &trans  &none  &none  &none  &none  &none  &none
-                           &kp LALT  &none   &mo LOWER  &kp SPACE    &none  &mo RAISE  &td_gaming_grave  &none
+                           &kp LALT  &td_gaming_toggle  &mo LOWER  &kp SPACE    &none  &mo RAISE  &kp GRAVE  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
